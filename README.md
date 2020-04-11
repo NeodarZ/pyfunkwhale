@@ -61,6 +61,14 @@ funkwhale = Funkwhale(client_name, redirect_uri, client_id, client_secret,
 artists = funkwhale.artists()
 
 print(artists)
+
+# In case you ask, their is an example for downloading a song
+r = funkwhale.listen("f9d02c64-bafa-43cb-8e1e-fa612e7c5dab")
+
+with open('/tmp/test.mp3', 'wb') as f:
+    for chunk in r.iter_content(chunk_size=8192):
+        if chunk:
+            f.write(chunk)
 ```
 
 # Features
@@ -81,7 +89,7 @@ List of features implemented or planned:
   - [x] List tracks
   - [x] Retrieve a single tracks
   - [x] List available user libraries containing work from this track
-- [ ] Download the audio file matching the given track uuid
+- [x] Download the audio file matching the given track uuid
 - [ ] License
   - [ ] List licences
   - [ ] Retrieve a single license

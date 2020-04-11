@@ -267,3 +267,46 @@ class Funkwhale(object):
 
         return self.client.call(
                 f'/tracks/{_id}/libraries/', 'get', params).json()
+
+    def listen(self, _uuid, to: str = None, upload: str = None):
+        """
+        Download the audio file matching the given track uuid
+
+        Given a track uuid (and not ID), return the first found audio file
+        accessible by the user making the request.
+
+        In case of a remote upload, this endpoint will fetch the audio file
+        from the remote and cache it before sending the response.
+
+        Parameters
+        ----------
+        _uuid : str
+            Track uuid
+        to : str, optional
+            If specified, the endpoint will return a transcoded version of the
+            original audio file.
+            Since transcoding happens on the fly, it can significantly
+            increase response time, and it's recommended to request transcoding
+            only for files that are not playable by the client.
+            This endpoint support bytess-range requests.
+            Available values : ogg, mp3
+        upload: str, optional
+            If specified, will return the audio for the given upload uuid.
+            This is useful for tracks that have multiple uploads available.
+
+        Raises
+        ------
+        ValueError
+            If `to` are set with wrong values
+        """
+
+        arguments = locals()
+
+        to_fields = ['ogg', 'mp3']
+        if to is not None and to not in to_fields:
+            raise ValueError("The to field {} is not in the to"
+                             "fields accepted".format(to))
+
+        params = self._build_params(arguments)
+
+        return self.client.call(f'/listen/{_uuid}', 'get', params)
