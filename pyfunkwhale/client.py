@@ -72,4 +72,6 @@ class Client(object):
         r = call(self.domain + '/api/v1/' + endpoint, headers=headers,
                  params=params, data=data)
 
+        r.raise_for_status()
+
         return r
