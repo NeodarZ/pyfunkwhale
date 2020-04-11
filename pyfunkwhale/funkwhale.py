@@ -29,6 +29,9 @@ class Funkwhale(object):
     def artists(self, q: str = None, ordering: str = None,
                 playable: bool = None, page: int = None,
                 page_size: int = None) -> dict:
+        """
+        List artists
+        """
 
         arguments = locals()
 
