@@ -67,3 +67,45 @@ class Funkwhale(object):
 
         return self.client.call(
                 f'/artists/{_id}/libraries/', 'get', params).json()
+
+    def albums(self, q: str = None, artist: int = None, ordering: str = None,
+               playable: bool = None, page: int = None,
+               page_size: int = None) -> dict:
+        """
+        List albums
+        """
+
+        arguments = locals()
+
+        ordering_field = ['creation_date', 'release_date', 'title']
+        if ordering is not None and ordering not in ordering_field:
+            raise ValueError("The ordering field {} is not in the ordering"
+                             "fields accepted".format(ordering))
+
+        params = self._build_params(arguments)
+
+        return self.client.call('/albums/', 'get', params).json()
+
+    def album(self, _id: int, refresh: bool = False):
+        """
+        Retrieve a single album
+        """
+
+        arguments = locals()
+
+        params = self._build_params(arguments)
+
+        return self.client.call(f'/albums/{_id}', 'get', params).json()
+
+    def album_libraries(self, _id: int, page: int = None,
+                        page_size: int = None):
+        """
+        List available user libraries containing work from this album
+        """
+
+        arguments = locals()
+
+        params = self._build_params(arguments)
+
+        return self.client.call(
+                f'/albums/{_id}/libraries/', 'get', params).json()
