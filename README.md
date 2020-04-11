@@ -67,9 +67,21 @@ print(artists)
 
 List of features implemented or planned:
 
-- [x]
+- [x] Login
   - [x] Login with OAuth2 Authorization Code flow
 - [/] Artists
   - [x] List artists
   - [ ] Retrieve a single artist
   - [ ] List available user libraries containing work from this artist
+- [ ] Albums
+  - [ ] List albums
+  - [ ] Retrieve a single album
+  - [ ] List available user libraries containing work from this album
+- [ ] Tracks
+  - [ ] List tracks
+  - [ ] Retrieve a single tracks
+  - [ ] List available user libraries containing work from this track
+- [ ] Download the audio file matching the given track uuid
+- [ ] License
+  - [ ] List licences
+  - [ ] Retrieve a single license
