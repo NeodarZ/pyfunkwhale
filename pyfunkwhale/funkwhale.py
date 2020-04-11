@@ -55,8 +55,8 @@ class Funkwhale(object):
 
         return self.client.call(f'/artists/{_id}', 'get', params).json()
 
-    def artist_librairies(self, _id: int, page: int = None,
-                          page_size: int = None):
+    def artist_libraries(self, _id: int, page: int = None,
+                         page_size: int = None):
         """
         List available user libraries containing work from this artist
         """
