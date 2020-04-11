@@ -62,15 +62,14 @@ class Client(object):
                 client_secret=self.client_secret)
             write_file(self.token_filename, self.token)
 
-    def call(self, endpoint, method):
+    def call(self, endpoint, method, params=None, data=None):
         self._refresh_token()
         headers = {'Authorization': self.token['token_type'] + ' ' +
                    self.token['access_token']}
 
         call = getattr(self.oauth_client, method)
 
-        r = call(
-            self.domain + '/api/v1/' + endpoint,
-            headers=headers)
+        r = call(self.domain + '/api/v1/' + endpoint, headers=headers,
+                 params=params, data=data)
 
         return r
