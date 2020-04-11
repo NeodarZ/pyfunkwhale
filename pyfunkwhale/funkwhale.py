@@ -13,5 +13,13 @@ class Funkwhale(object):
                 scopes, username, password, domain, authorization_endpoint,
                 token_endpoint, token_filename)
 
+    def _build_params(self, arguments):
+        params = {}
+        for k, v in arguments.items():
+            if k != 'self' and v is not None:
+                params[k] = v
+
+        return params
+
     def artists(self):
         return self.client.call('/artists/', 'get').json()
