@@ -16,8 +16,8 @@ class Funkwhale(object):
     def _build_params(self, arguments):
         """
         Build params dict for python-requests. Not that all key who start
-        with an underscore are treated as par of the uri and are not in
-        the params dict.
+        with an underscore are treated as par of the endpoint uri and are not
+        as uri parameters.
         """
         params = {}
         for k, v in arguments.items():
