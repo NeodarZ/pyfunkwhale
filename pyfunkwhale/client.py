@@ -2,6 +2,7 @@
 # -*- conding: utf-8 -*-
 
 import json
+import re
 from time import time
 from requests_oauthlib import OAuth2Session
 from requests.models import Response
@@ -97,6 +98,8 @@ class Client(object):
                    self.token['access_token']}
 
         call = getattr(self.oauth_client, method)
+
+        endpoint = re.sub(r'^\/', '', endpoint)
 
         r = call(self.domain + '/api/v1/' + endpoint, headers=headers,
                  params=params, data=data)
