@@ -41,7 +41,7 @@ class Funkwhale(object):
 
         return self.client.call('/artists/', 'get', params).json()
 
-    def artist(self, _id, refresh: bool = False):
+    def artist(self, _id: int, refresh: bool = False):
         """
         Retrieve a single artist
         """
