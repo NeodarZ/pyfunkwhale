@@ -14,9 +14,14 @@ class Funkwhale(object):
                 token_endpoint, token_filename)
 
     def _build_params(self, arguments):
+        """
+        Build params dict for python-requests. Not that all key who start
+        with an underscore are treated as par of the uri and are not in
+        the params dict.
+        """
         params = {}
         for k, v in arguments.items():
-            if k != 'self' and v is not None:
+            if k != 'self' and v is not None and not k.startswith("_"):
                 params[k] = v
 
         return params
