@@ -71,7 +71,7 @@ List of features implemented or planned:
   - [x] Login with OAuth2 Authorization Code flow
 - [/] Artists
   - [x] List artists
-  - [ ] Retrieve a single artist
+  - [x] Retrieve a single artist
   - [ ] List available user libraries containing work from this artist
 - [ ] Albums
   - [ ] List albums
