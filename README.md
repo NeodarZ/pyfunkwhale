@@ -72,7 +72,7 @@ List of features implemented or planned:
 - [/] Artists
   - [x] List artists
   - [x] Retrieve a single artist
-  - [ ] List available user libraries containing work from this artist
+  - [x] List available user libraries containing work from this artist
 - [ ] Albums
   - [ ] List albums
   - [ ] Retrieve a single album
