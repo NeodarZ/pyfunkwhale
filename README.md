@@ -75,8 +75,14 @@ with open('/tmp/test.mp3', 'wb') as f:
 
 List of features implemented or planned:
 
-- [x] Login
+- [/] Auth
   - [x] Login with OAuth2 Authorization Code flow
+  - [ ] Register an OAuth2 application
+  - [ ] Get an JWT token
+  - [ ] Create an account
+  - [ ] Request a password request
+  - [ ] Retrieve user information
+  - [ ] Retrieve rate-limit information and current usage status
 - [x] Artists
   - [x] List artists
   - [x] Retrieve a single artist
