@@ -69,7 +69,7 @@ List of features implemented or planned:
 
 - [x] Login
   - [x] Login with OAuth2 Authorization Code flow
-- [/] Artists
+- [x] Artists
   - [x] List artists
   - [x] Retrieve a single artist
   - [x] List available user libraries containing work from this artist
