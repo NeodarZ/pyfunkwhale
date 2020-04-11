@@ -49,7 +49,7 @@ class Funkwhale(object):
         Raises
         ------
         ValueError
-            If ordering are set with wrong values
+            If `ordering` are set with wrong values
         """
 
         arguments = locals()
@@ -129,7 +129,7 @@ class Funkwhale(object):
         Raises
         ------
         ValueError
-            If ordering are set with wrong values
+            If `ordering` are set with wrong values
         """
 
         arguments = locals()
@@ -214,7 +214,7 @@ class Funkwhale(object):
         Raises
         ------
         ValueError
-            If ordering are set with wrong values
+            If `ordering` are set with wrong values
         """
 
         arguments = locals()
