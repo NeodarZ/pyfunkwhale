@@ -93,6 +93,7 @@ List of features implemented or planned:
 - [x] License
   - [x] List licences
   - [x] Retrieve a single license
-- [ ] favorites
+- [\] favorites
+  - [x] List favorites
   - [ ] Mark a given track as favorite
   - [ ] Remove

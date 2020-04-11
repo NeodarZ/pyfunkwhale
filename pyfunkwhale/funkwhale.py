@@ -351,3 +351,26 @@ class Funkwhale(object):
         params = self._build_params(arguments)
 
         return self.client.call(f'/licenses/{_code}', 'get', params).json()
+
+    def favorites_tracks(self, q: str = None, user: str = None,
+                         page: int = None, page_size: int = None) -> dict:
+        """
+        List favorites tracks
+
+        Parameters
+        ----------
+        q : str, optional
+            Search query used to filter favorites tracks
+        user : str, optional
+            Limit results to favorites tracks belonging to the given user
+        page : int, optional
+            Default value : 1
+        page_size : int, optional
+            Default value : 25
+        """
+
+        arguments = locals()
+
+        params = self._build_params(arguments)
+
+        return self.client.call(f'/favorites/tracks/', 'get', params).json()
