@@ -96,4 +96,4 @@ List of features implemented or planned:
 - [/] favorites
   - [x] List favorites
   - [ ] Mark a given track as favorite
-  - [ ] Remove
+  - [ ] Remove a given track from favorites
