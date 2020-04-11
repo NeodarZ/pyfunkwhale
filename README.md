@@ -77,10 +77,10 @@ List of features implemented or planned:
   - [x] List albums
   - [x] Retrieve a single album
   - [x] List available user libraries containing work from this album
-- [ ] Tracks
-  - [ ] List tracks
-  - [ ] Retrieve a single tracks
-  - [ ] List available user libraries containing work from this track
+- [x] Tracks
+  - [x] List tracks
+  - [x] Retrieve a single tracks
+  - [x] List available user libraries containing work from this track
 - [ ] Download the audio file matching the given track uuid
 - [ ] License
   - [ ] List licences
