@@ -19,7 +19,7 @@ def read_file(filename):
     return data
 
 
-def write_file(filename, data):
+def write_file(filename, datas):
     """
     Simple wrapper for write data in file
 
@@ -27,10 +27,10 @@ def write_file(filename, data):
     ----------
     filename : str
         The filename where write the datas
-    data : str
+    datas : str
         The datas to write in the filename
     """
     with open(filename, 'w') as file:
-        file.write(json.dumps(data))
+        file.write(json.dumps(datas))
 
-    return data
+    return datas
