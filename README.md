@@ -93,6 +93,18 @@ List of features implemented or planned:
 - [x] License
   - [x] List licences
   - [x] Retrieve a single license
+- [ ] libraries
+  - [ ] List owned libraries
+  - [ ] Create a new librarie
+  - [ ] Retrieve a librarie
+  - [ ] Update a librarie
+  - [ ] Update a librarie
+  - [ ] Delete a librarie and all associated password
+- [ ] Uploads
+  - [ ] List owned upload
+  - [ ] Upload a new file in a library
+  - [ ] Retrieve an upload
+  - [ ] Delete a an upload
 - [/] favorites
   - [x] List favorites
   - [ ] Mark a given track as favorite
