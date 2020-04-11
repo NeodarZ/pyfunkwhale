@@ -67,5 +67,9 @@ print(artists)
 
 List of features implemented or planned:
 
-[x] Login with OAuth2 Authorization Code flow
-[x] List artists
+- [x]
+  - [x] Login with OAuth2 Authorization Code flow
+- [/] Artists
+  - [x] List artists
+  - [ ] Retrieve a single artist
+  - [ ] List available user libraries containing work from this artist
