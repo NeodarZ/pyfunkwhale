@@ -21,5 +21,17 @@ class Funkwhale(object):
 
         return params
 
-    def artists(self):
-        return self.client.call('/artists/', 'get').json()
+    def artists(self, q: str = None, ordering: str = None,
+                playable: bool = None, page: int = None,
+                page_size: int = None) -> dict:
+
+        arguments = locals()
+
+        ordering_field = ['creation_date', 'id', 'name']
+        if ordering is not None and ordering not in ordering_field:
+            raise ValueError("The ordering field {} is not in the ordering"
+                             "fields accepted".format(ordering))
+
+        params = self._build_params(arguments)
+
+        return self.client.call('/artists/', 'get', params).json()
