@@ -4,6 +4,7 @@
 import json
 from time import time
 from requests_oauthlib import OAuth2Session
+from requests.models import Response
 
 from pyfunkwhale.utils import read_file, write_file
 
@@ -70,7 +71,8 @@ class Client(object):
                 client_secret=self.client_secret)
             write_file(self.token_filename, self.token)
 
-    def call(self, endpoint, method, params=None, data=None):
+    def call(self, endpoint: str, method: str, params: dict = None,
+             data: dict = None) -> Response:
         """
         Call the API
 

@@ -4,7 +4,7 @@
 import json
 
 
-def read_file(filename):
+def read_file(filename: str) -> str:
     """
     Simple wrapper for read a file content
 
@@ -19,7 +19,7 @@ def read_file(filename):
     return data
 
 
-def write_file(filename, datas):
+def write_file(filename: str, datas: str) -> str:
     """
     Simple wrapper for write data in file
 
