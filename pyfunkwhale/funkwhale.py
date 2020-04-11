@@ -317,3 +317,37 @@ class Funkwhale(object):
         params = self._build_params(arguments)
 
         return self.client.call(f'/listen/{_uuid}', 'get', params)
+
+    def licenses(self, page: str = None, page_size: str = None) -> dict:
+        """
+        List license
+
+        Parameters
+        ----------
+        page : int, optional
+            Default value: 1
+        page_size : int, optional
+            Default value: 25
+        """
+
+        arguments = locals()
+
+        params = self._build_params(arguments)
+
+        return self.client.call(f'/licenses/', 'get', params).json()
+
+    def license(self, _code) -> dict:
+        """
+        Retrieve a single license
+
+        Parameters
+        ----------
+        _code : str
+            License code
+        """
+
+        arguments = locals()
+
+        params = self._build_params(arguments)
+
+        return self.client.call(f'/licenses/{_code}', 'get', params).json()

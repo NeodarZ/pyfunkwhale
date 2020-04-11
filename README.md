@@ -90,6 +90,6 @@ List of features implemented or planned:
   - [x] Retrieve a single tracks
   - [x] List available user libraries containing work from this track
 - [x] Download the audio file matching the given track uuid
-- [ ] License
-  - [ ] List licences
-  - [ ] Retrieve a single license
+- [x] License
+  - [x] List licences
+  - [x] Retrieve a single license
