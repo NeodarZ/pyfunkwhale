@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from requests.models import Response
+
 from pyfunkwhale.client import Client
 
 
@@ -13,11 +15,16 @@ class Funkwhale(object):
                 scopes, username, password, domain, authorization_endpoint,
                 token_endpoint, token_filename)
 
-    def _build_params(self, arguments):
+    def _build_params(self, arguments: dict) -> dict:
         """
         Build params dict for python-requests. Not that all key who start
         with an underscore are treated as par of the endpoint uri and are not
         as uri parameters.
+
+        Parameters
+        ----------
+        arguments: dict
+            Arguments of a function
         """
         params = {}
         for k, v in arguments.items():
@@ -63,7 +70,7 @@ class Funkwhale(object):
 
         return self.client.call('/artists/', 'get', params).json()
 
-    def artist(self, _id: int, refresh: bool = False):
+    def artist(self, _id: int, refresh: bool = False) -> dict:
         """
         Retrieve a single artist
 
@@ -82,7 +89,7 @@ class Funkwhale(object):
         return self.client.call(f'/artists/{_id}', 'get', params).json()
 
     def artist_libraries(self, _id: int, page: int = None,
-                         page_size: int = None):
+                         page_size: int = None) -> dict:
         """
         List available user libraries containing work from this artist
 
@@ -143,7 +150,7 @@ class Funkwhale(object):
 
         return self.client.call('/albums/', 'get', params).json()
 
-    def album(self, _id: int, refresh: bool = False):
+    def album(self, _id: int, refresh: bool = False) -> dict:
         """
         Retrieve a single album
 
@@ -162,7 +169,7 @@ class Funkwhale(object):
         return self.client.call(f'/albums/{_id}', 'get', params).json()
 
     def album_libraries(self, _id: int, page: int = None,
-                        page_size: int = None):
+                        page_size: int = None) -> dict:
         """
         List available user libraries containing work from this album
 
@@ -228,7 +235,7 @@ class Funkwhale(object):
 
         return self.client.call('/tracks/', 'get', params).json()
 
-    def track(self, _id: int, refresh: bool = False):
+    def track(self, _id: int, refresh: bool = False) -> dict:
         """
         Retrieve a single track
 
@@ -247,7 +254,7 @@ class Funkwhale(object):
         return self.client.call(f'/tracks/{_id}', 'get', params).json()
 
     def track_libraries(self, _id: int, page: int = None,
-                        page_size: int = None):
+                        page_size: int = None) -> dict:
         """
         List available user libraries containing work from this track
 
@@ -268,7 +275,7 @@ class Funkwhale(object):
         return self.client.call(
                 f'/tracks/{_id}/libraries/', 'get', params).json()
 
-    def listen(self, _uuid, to: str = None, upload: str = None):
+    def listen(self, _uuid, to: str = None, upload: str = None) -> Response:
         """
         Download the audio file matching the given track uuid
 
