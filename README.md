@@ -28,8 +28,6 @@ Example usage:
 #!/usr/bin/env python
 # -*- condig: utf-8 -*-
 
-import requests
-
 from pyfunkwhale.funkwhale import Funkwhale
 
 client_name = "pyfunkwhale"
