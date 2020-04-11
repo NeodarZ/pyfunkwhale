@@ -44,6 +44,10 @@ class Client(object):
             write_file(token_filename, self.token)
 
     def _get_token(self):
+        """
+        Ask the user to go on the authorization page of the funkwhale instance
+        and then wait the response code for fetch the token generated.
+        """
         print("For authorizate this app go to:\n{}".format(
                 self.authorization_url))
         self.authorization_code = input("Enter response code: ")
@@ -54,6 +58,10 @@ class Client(object):
                                 client_secret=self.client_secret)
 
     def _refresh_token(self):
+        """
+        Check if the token is expired in 60 seconds and if True will ask a new
+        token from the instance.
+        """
         if time() - 60 > self.token["expires_at"]:
             self.token = self.oauth_client.refresh_token(
                 self.token_endpoint,
@@ -63,6 +71,25 @@ class Client(object):
             write_file(self.token_filename, self.token)
 
     def call(self, endpoint, method, params=None, data=None):
+        """
+        Call the API
+
+        Parameters
+        ----------
+        endpoint : str
+            The endpoint to call on the API
+        method : str
+            The HTTP method to use for calling the endpoint
+        params : dict, optional
+            The uri params for a GET method
+        data : dict, optional
+            The uri data for a POST method
+
+        Raises
+        ------
+        requests.exceptions.HTTPError
+            If their is an error during requesting the API.
+        """
         self._refresh_token()
         headers = {'Authorization': self.token['token_type'] + ' ' +
                    self.token['access_token']}

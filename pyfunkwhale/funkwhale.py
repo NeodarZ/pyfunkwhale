@@ -31,6 +31,25 @@ class Funkwhale(object):
                 page_size: int = None) -> dict:
         """
         List artists
+
+        Parameters
+        ----------
+        q : str, optional
+            Search query used to filter artists
+        ordering : str, optional
+            Ordering for the results, prefix with - for DESC ordering
+            Available values: creation_date, id, name
+        playable : bool, optional
+            Filter/exclude resources with playable artits
+        page : int, optional
+            Default value: 1
+        page_size : int, optional
+            Default value: 25
+
+        Raises
+        ------
+        ValueError
+            If ordering are set with wrong values
         """
 
         arguments = locals()
@@ -47,6 +66,13 @@ class Funkwhale(object):
     def artist(self, _id: int, refresh: bool = False):
         """
         Retrieve a single artist
+
+        Parameters
+        ----------
+        _id : int
+            Object ID
+        refresh : bool, optional
+            Trigger an ActivityPub fetch to refresh local data
         """
 
         arguments = locals()
@@ -59,6 +85,15 @@ class Funkwhale(object):
                          page_size: int = None):
         """
         List available user libraries containing work from this artist
+
+        Parameters
+        ----------
+        _id : int
+            Object ID
+        page : int, optional
+            Default value: 1
+        page_size : int, optional
+            Default value: 25
         """
 
         arguments = locals()
@@ -73,6 +108,28 @@ class Funkwhale(object):
                page_size: int = None) -> dict:
         """
         List albums
+
+
+        Parameters
+        ----------
+        q : str, optional
+            Search query used to filter albums
+        artist : int, optional
+            Only include albums by the requested artist
+        ordering : str, optional
+            Ordering for the results, prefix with - for DESC ordering
+            Available values: creation_date, release_date, title
+        playable : bool, optional
+            Filter/exclude resources with playable albums
+        page : int, optional
+            Default value: 1
+        page_size : int, optional
+            Default value: 25
+
+        Raises
+        ------
+        ValueError
+            If ordering are set with wrong values
         """
 
         arguments = locals()
@@ -89,6 +146,13 @@ class Funkwhale(object):
     def album(self, _id: int, refresh: bool = False):
         """
         Retrieve a single album
+
+        Parameters
+        ----------
+        _id : int
+            Object ID
+        refresh : bool, optional
+            Trigger an ActivityPub fetch to refresh local data
         """
 
         arguments = locals()
@@ -101,6 +165,15 @@ class Funkwhale(object):
                         page_size: int = None):
         """
         List available user libraries containing work from this album
+
+        Parameters
+        ----------
+        _id : int
+            Object ID
+        page : int, optional
+            Default value: 1
+        page_size : int, optional
+            Default value: 25
         """
 
         arguments = locals()
