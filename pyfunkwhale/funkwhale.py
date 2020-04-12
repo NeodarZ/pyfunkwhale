@@ -34,7 +34,7 @@ class Funkwhale(object):
         return params
 
     def create_app(self, name: str, redirect_uris: str = None,
-                   scopes: str = None):
+                   scopes: str = None) -> dict:
         """
         Register an OAuth application
 

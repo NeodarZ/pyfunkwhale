@@ -83,7 +83,7 @@ class Client(object):
         self._get_token()
         write_file(self.token_filename, self.token)
 
-    def _get_JWT_token(self):
+    def _get_JWT_token(self) -> dict:
         """
         Get a JWT token.
         """
