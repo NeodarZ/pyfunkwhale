@@ -81,7 +81,7 @@ List of features implemented or planned:
   - [x] Get an JWT token
   - [ ] Create an account
   - [ ] Request a password request
-  - [ ] Retrieve user information
+  - [x] Retrieve user information
   - [ ] Retrieve rate-limit information and current usage status
 - [x] Artists
   - [x] List artists

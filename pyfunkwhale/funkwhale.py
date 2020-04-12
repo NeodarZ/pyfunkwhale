@@ -55,6 +55,13 @@ class Funkwhale(object):
 
         return self.client.call('/oauth/apps/', 'post', data=datas).json()
 
+    def user_me(self):
+        """
+        Retrieve profile informations of the current user
+        """
+
+        return self.client.call('/users/users/me', 'get').json()
+
     def artists(self, q: str = None, ordering: str = None,
                 playable: bool = None, page: int = None,
                 page_size: int = None) -> dict:
