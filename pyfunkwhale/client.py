@@ -76,6 +76,13 @@ class Client(object):
                 self._get_token()
             write_file(self.token_filename, self.token)
 
+    def _force_refresh_token(self):
+        """
+        Force the refresh of the OAuth2 token
+        """
+        self._get_token()
+        write_file(self.token_filename, self.token)
+
     def _get_JWT_token(self):
         """
         Get a JWT token.
