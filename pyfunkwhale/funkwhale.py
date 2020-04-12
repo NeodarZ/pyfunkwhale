@@ -33,6 +33,28 @@ class Funkwhale(object):
 
         return params
 
+    def create_app(self, name: str, redirect_uris: str = None,
+                   scopes: str = None):
+        """
+        Register an OAuth application
+
+        Parameters
+        ----------
+        name : str
+            Name of the application
+        redirect_uris : str, optional
+            Uris where the instance will redirect
+        scopes : str, optional
+            Rights of the application on the instance
+            Default value: read
+        """
+
+        arguments = locals()
+
+        datas = self._build_params(arguments)
+
+        return self.client.call('/oauth/apps/', 'post', data=datas).json()
+
     def artists(self, q: str = None, ordering: str = None,
                 playable: bool = None, page: int = None,
                 page_size: int = None) -> dict:
