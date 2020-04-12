@@ -123,6 +123,11 @@ class Client(object):
         r = call(self.domain + '/api/v1/' + endpoint, headers=headers,
                  params=params, data=data)
 
+        if r.status_code == 401:
+            self._force_refresh_token()
+            r = call(self.domain + '/api/v1/' + endpoint, headers=headers,
+                     params=params, data=data)
+
         r.raise_for_status()
 
         return r
