@@ -78,7 +78,7 @@ List of features implemented or planned:
 - [/] Auth
   - [x] Login with OAuth2 Authorization Code flow
   - [ ] Register an OAuth2 application
-  - [ ] Get an JWT token
+  - [x] Get an JWT token
   - [ ] Create an account
   - [ ] Request a password request
   - [ ] Retrieve user information

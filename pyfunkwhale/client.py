@@ -76,6 +76,13 @@ class Client(object):
                 self._get_token()
             write_file(self.token_filename, self.token)
 
+    def _get_JWT_token(self):
+        """
+        Get a JWT token.
+        """
+        data = {"username": self.username, "password": self.password}
+        return self.call('/token', 'post', data=data).json()
+
     def call(self, endpoint: str, method: str, params: dict = None,
              data: dict = None) -> Response:
         """
