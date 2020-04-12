@@ -111,7 +111,7 @@ List of features implemented or planned:
   - [ ] Upload a new file in a library
   - [ ] Retrieve an upload
   - [ ] Delete a an upload
-- [/] favorites
+- [x] favorites
   - [x] List favorites
-  - [ ] Mark a given track as favorite
-  - [ ] Remove a given track from favorites
+  - [x] Mark a given track as favorite
+  - [x] Remove a given track from favorites

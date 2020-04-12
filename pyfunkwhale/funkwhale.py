@@ -374,3 +374,38 @@ class Funkwhale(object):
         params = self._build_params(arguments)
 
         return self.client.call(f'/favorites/tracks/', 'get', params).json()
+
+    def add_favorite_track(self, track: str) -> dict:
+        """
+        Add a track to favorite
+
+        Parameters
+        ----------
+        track : str
+            The track id to add to favorites
+        """
+
+        arguments = locals()
+
+        data = self._build_params(arguments)
+
+        return self.client.call(
+                f'/favorites/tracks', 'post', data=data).json()
+
+    def delete_favorite_track(self, track: str) -> Response:
+        """
+        Remove a track from favorites.
+
+
+        Parameters
+        ----------
+        track : str
+            The track id to remove from favorites
+        """
+
+        arguments = locals()
+
+        data = self._build_params(arguments)
+
+        return self.client.call(
+                f'/favorites/tracks/remove/', 'post', data=data)
