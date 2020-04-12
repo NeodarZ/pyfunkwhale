@@ -91,7 +91,7 @@ class Client(object):
         return self.call('/token', 'post', data=data).json()
 
     def call(self, endpoint: str, method: str, params: dict = None,
-             data: dict = None) -> Response:
+             data: dict = None, headers: dict = None) -> Response:
         """
         Call the API
 
@@ -112,8 +112,9 @@ class Client(object):
             If their is an error during requesting the API.
         """
         self._refresh_token()
-        headers = {'Authorization': self.token['token_type'] + ' ' +
-                   self.token['access_token']}
+        if headers is None:
+            headers = {'Authorization': self.token['token_type'] + ' ' +
+                       self.token['access_token']}
 
         call = getattr(self.oauth_client, method)
 
