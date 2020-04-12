@@ -5,6 +5,7 @@ import json
 import re
 from time import time
 from requests_oauthlib import OAuth2Session
+from oauthlib.oauth2.rfc6749.errors import InvalidScopeError
 from requests.models import Response
 
 from pyfunkwhale.utils import read_file, write_file
@@ -65,11 +66,14 @@ class Client(object):
         token from the instance.
         """
         if time() - 60 > self.token["expires_at"]:
-            self.token = self.oauth_client.refresh_token(
-                self.token_endpoint,
-                refresh_token=self.token["refresh_token"],
-                client_id=self.client_id,
-                client_secret=self.client_secret)
+            try:
+                self.token = self.oauth_client.refresh_token(
+                    self.token_endpoint,
+                    refresh_token=self.token["refresh_token"],
+                    client_id=self.client_id,
+                    client_secret=self.client_secret)
+            except InvalidScopeError:
+                self._get_token()
             write_file(self.token_filename, self.token)
 
     def call(self, endpoint: str, method: str, params: dict = None,
