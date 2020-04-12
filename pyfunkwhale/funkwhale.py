@@ -62,6 +62,13 @@ class Funkwhale(object):
 
         return self.client.call('/users/users/me', 'get').json()
 
+    def rate_limit(self):
+        """
+        Retrieve rate-limit information and current usage status
+        """
+
+        return self.client.call('/rate-limit', 'get').json()
+
     def artists(self, q: str = None, ordering: str = None,
                 playable: bool = None, page: int = None,
                 page_size: int = None) -> dict:

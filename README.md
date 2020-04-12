@@ -82,7 +82,7 @@ List of features implemented or planned:
   - [ ] Create an account
   - [ ] Request a password request
   - [x] Retrieve user information
-  - [ ] Retrieve rate-limit information and current usage status
+  - [x] Retrieve rate-limit information and current usage status
 - [x] Artists
   - [x] List artists
   - [x] Retrieve a single artist
