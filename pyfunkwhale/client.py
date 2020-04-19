@@ -10,6 +10,14 @@ from requests.models import Response
 
 from pyfunkwhale.utils import read_file, write_file
 
+class InvalidTokenError(Exception):
+
+    def __init__(self, client):
+        self.message = client.authorization_url
+
+    def __str__(self):
+        return self.message
+
 
 class Client(object):
 
@@ -39,26 +47,27 @@ class Client(object):
             authorization_url(
                             self.authorization_endpoint)
 
+    def _connect(self):
+        """
+        Use saved token or ask a new one to the API.
+        """
         try:
-            self.token = json.loads(read_file(token_filename))
+            self.token = json.loads(read_file(self.token_filename))
             self._refresh_token()
         except FileNotFoundError:
-            self._get_token()
-            write_file(token_filename, self.token)
+            raise InvalidTokenError(self)
 
-    def _get_token(self):
+    def _set_token(self, authorization_code):
         """
-        Ask the user to go on the authorization page of the funkwhale instance
-        and then wait the response code for fetch the token generated.
+        Use the authorization_code to fetch the new token.
         """
-        print("For authorizate this app go to:\n{}".format(
-                self.authorization_url))
-        self.authorization_code = input("Enter response code: ")
+        self.authorization_code = authorization_code
 
         self.token = self.oauth_client.fetch_token(
                                 self.token_endpoint,
                                 code=self.authorization_code,
                                 client_secret=self.client_secret)
+        write_file(self.token_filename, self.token)
 
     def _refresh_token(self):
         """
@@ -110,23 +119,23 @@ class Client(object):
         ------
         requests.exceptions.HTTPError
             If their is an error during requesting the API.
+        pyfunkwhale.client.InvalidTokenError
+            If current token is invalid
         """
         self._refresh_token()
         if headers is None:
             headers = {'Authorization': self.token['token_type'] + ' ' +
                        self.token['access_token']}
 
-        call = getattr(self.oauth_client, method)
+        _call = getattr(self.oauth_client, method)
 
         endpoint = re.sub(r'^\/', '', endpoint)
 
-        r = call(self.domain + '/api/v1/' + endpoint, headers=headers,
-                 params=params, data=data)
+        r = _call(self.domain + '/api/v1/' + endpoint, headers=headers,
+                params=params, data=data)
 
         if r.status_code == 401:
-            self._force_refresh_token()
-            r = call(self.domain + '/api/v1/' + endpoint, headers=headers,
-                     params=params, data=data)
+            raise InvalidTokenError(self)
 
         r.raise_for_status()
 

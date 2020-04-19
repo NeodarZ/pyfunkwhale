@@ -54,16 +54,30 @@ token_endpoint = "https://demo.funkwhale.audio/api/v1/oauth/token/"
 # Save the OAuth2 infos in file, this is ugly yup
 token_filename = 'oauth_token.data'
 
+# You need to handle the invalidity of a token and ask for a new one
+def _ask_new_auth(funkwhale, message):
+  print(message)
+  authorization_code = input("Enter response code: ")
+  funkwhale.client._set_token(authorization_code)
+
 funkwhale = Funkwhale(client_name, redirect_uri, client_id, client_secret,
                 scopes, username, password, domain, authorization_endpoint,
                 token_endpoint, token_filename)
 
-artists = funkwhale.artists()
+try:
+  artists = funkwhale.artists()
+except InvalidTokenError as e
+  _ask_new_auth(funkwhale, e.message)
+  artists = funkwhale.artists()
 
 print(artists)
 
 # In case you ask, their is an example for downloading a song
-r = funkwhale.listen("f9d02c64-bafa-43cb-8e1e-fa612e7c5dab")
+try:
+  r = funkwhale.listen("f9d02c64-bafa-43cb-8e1e-fa612e7c5dab")
+except InvalidTokenError as e:
+  _ask_new_auth(funkwhale, e.message)
+  r = funkwhale.rate_limit()
 
 with open('/tmp/test.mp3', 'wb') as f:
     for chunk in r.iter_content(chunk_size=8192):
