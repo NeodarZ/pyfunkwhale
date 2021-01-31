@@ -29,6 +29,7 @@ Example usage:
 # -*- condig: utf-8 -*-
 
 from pyfunkwhale.funkwhale import Funkwhale
+from pyfunkwhale.client import InvalidTokenError
 
 client_name = "pyfunkwhale"
 
@@ -66,7 +67,7 @@ funkwhale = Funkwhale(client_name, redirect_uri, client_id, client_secret,
 
 try:
   artists = funkwhale.artists()
-except InvalidTokenError as e
+except InvalidTokenError as e:
   _ask_new_auth(funkwhale, e.message)
   artists = funkwhale.artists()
 
