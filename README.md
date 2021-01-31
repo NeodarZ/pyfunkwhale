@@ -17,12 +17,47 @@ pip install -r requirements.txt
 
 # Use
 
-This client library use th OAuth2 Authorization Code flow and ask to the user
-to authorize this app. I'm not ok with how I do this for the moment. If you
-have suggestion about how to do this, I will gladly accept to discuse it.
-And you can also send me suggestions for other parts of this module ;)
+First you to select an authentification method, two are actually available
+Plain HTTP and OAuth2.
 
-Example usage:
+## Plain HTTP authentification
+
+```
+#!/usr/bin/env python
+# -*- condig: utf-8 -*-
+
+from pyfunkwhale.funkwhale import Funkwhale
+from pyfunkwhale.client import InvalidTokenError
+
+client_name = "pyfunkwhale"
+
+redirect_uri = "urn:ietf:wg:oauth:2.0:oob"
+
+# This is your instance and login information
+username = "demo"
+password = "demo"
+domain = "https://demo.funkwhale.audio"
+
+authorization_endpoint = domain + "/authorize"
+login_endpoint = domain + "/api/v1/oauth/token/"
+
+login_endpoint = domain + "/api/v1/token/"
+
+funkwhale = Funkwhale(
+    client_name,
+    redirect_uri,
+    username,
+    password,
+    domain,
+    login_endpoint,
+)
+
+artists = funkwhale.albums()
+
+print(artists)
+```
+
+## OAuth2 Authorization Code flow
 
 ```
 #!/usr/bin/env python
@@ -48,9 +83,8 @@ domain = "https://demo.funkwhale.audio"
 
 scopes = "read"
 
-authorization_endpoint = "https://demo.funkwhale.audio/authorize"
-token_endpoint = "https://demo.funkwhale.audio/api/v1/oauth/token/"
-
+authorization_endpoint = domain + "/authorize"
+login_endpoint = domain + "/api/v1/oauth/token/"
 
 # Save the OAuth2 infos in file, this is ugly yup
 token_filename = 'oauth_token.data'
@@ -61,9 +95,19 @@ def _ask_new_auth(funkwhale, message):
   authorization_code = input("Enter response code: ")
   funkwhale.client._set_token(authorization_code)
 
-funkwhale = Funkwhale(client_name, redirect_uri, client_id, client_secret,
-                scopes, username, password, domain, authorization_endpoint,
-                token_endpoint, token_filename)
+funkwhale = Funkwhale(
+    client_name,
+    redirect_uri,
+    username,
+    password,
+    domain,
+    login_endpoint,
+    client_secret,
+    scopes,
+    client_id,
+    authorization_endpoint,
+    token_filename,
+)
 
 try:
   artists = funkwhale.artists()
@@ -72,13 +116,14 @@ except InvalidTokenError as e:
   artists = funkwhale.artists()
 
 print(artists)
+```
 
-# In case you ask, their is an example for downloading a song
-try:
-  r = funkwhale.listen("f9d02c64-bafa-43cb-8e1e-fa612e7c5dab")
-except InvalidTokenError as e:
-  _ask_new_auth(funkwhale, e.message)
-  r = funkwhale.rate_limit()
+## Examples
+
+In case you ask, their is an example for downloading a song
+
+```
+r = funkwhale.listen("f9d02c64-bafa-43cb-8e1e-fa612e7c5dab")
 
 with open('/tmp/test.mp3', 'wb') as f:
     for chunk in r.iter_content(chunk_size=8192):
@@ -91,9 +136,12 @@ with open('/tmp/test.mp3', 'wb') as f:
 List of features implemented or planned:
 
 - [/] Auth
-  - [x] Login with OAuth2 Authorization Code flow
-  - [x] Register an OAuth2 application
-  - [x] Get an JWT token
+  - [x] OAuth2 Authorization Code flow
+    - [x] Login
+    - [x] Register an application
+    - [x] Get an JWT token
+  - [x] Simple Authentication
+    - [x] Login
   - [ ] Create an account
   - [ ] Request a password request
   - [x] Retrieve user information
