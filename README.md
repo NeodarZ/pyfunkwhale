@@ -52,7 +52,7 @@ funkwhale = Funkwhale(
     login_endpoint,
 )
 
-artists = funkwhale.albums()
+artists = funkwhale.artists()
 
 print(artists)
 ```
