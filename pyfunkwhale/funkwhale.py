@@ -94,8 +94,12 @@ class Funkwhale(object):
 
         ordering_field = ['creation_date', 'id', 'name']
         if ordering is not None and ordering not in ordering_field:
-            raise ValueError("The ordering field {} is not in the ordering"
-                             "fields accepted".format(ordering))
+            raise ValueError(
+                "The ordering field '{}' is not in the ordering fields "
+                "accepted. Accepted values: {}".format(
+                    ordering, ordering_field
+                )
+            )
 
         params = self._build_params(arguments)
 
@@ -174,8 +178,12 @@ class Funkwhale(object):
 
         ordering_field = ['creation_date', 'release_date', 'title']
         if ordering is not None and ordering not in ordering_field:
-            raise ValueError("The ordering field {} is not in the ordering"
-                             "fields accepted".format(ordering))
+            raise ValueError(
+                "The ordering field '{}' is not in the ordering fields "
+                "accepted. Accepted values: {}".format(
+                    ordering, ordering_field
+                )
+            )
 
         params = self._build_params(arguments)
 
@@ -259,8 +267,12 @@ class Funkwhale(object):
 
         ordering_field = ['creation_date', 'release_date', 'title']
         if ordering is not None and ordering not in ordering_field:
-            raise ValueError("The ordering field {} is not in the ordering"
-                             "fields accepted".format(ordering))
+            raise ValueError(
+                "The ordering field '{}' is not in the ordering fields "
+                "accepted. Accepted values: {}".format(
+                    ordering, ordering_field
+                )
+            )
 
         params = self._build_params(arguments)
 

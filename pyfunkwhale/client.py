@@ -96,10 +96,15 @@ class Client(object):
         except FileNotFoundError:
             raise InvalidTokenError(self)
 
-    def _set_token(self, authorization_code):
+    def _set_token(self, authorization_code: str = None):
         """
         Use the authorization_code to fetch the new token.
         """
+        if (
+                getattr(self, 'authorization_code', False)
+                and not authorization_code
+        ):
+            raise InvalidTokenError(self)
         self.authorization_code = authorization_code
 
         self.token = self.oauth_client.fetch_token(
@@ -122,15 +127,15 @@ class Client(object):
                     refresh_token=self.token["refresh_token"],
                     client_id=self.client_id,
                     client_secret=self.client_secret)
+                write_file(self.token_filename, self.token)
             except InvalidScopeError:
-                self._get_token()
-            write_file(self.token_filename, self.token)
+                raise InvalidTokenError(self)
 
     def _force_refresh_token(self):
         """
         Force the refresh of the OAuth2 token
         """
-        self._get_token()
+        self._set_token()
         write_file(self.token_filename, self.token)
 
     def _get_JWT_token(self) -> dict:
