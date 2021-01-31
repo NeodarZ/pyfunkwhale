@@ -22,11 +22,41 @@ class InvalidTokenError(Exception):
 
 class Client(object):
 
-    def __init__(self, client_name, redirect_uri, username, password, domain,
-                 login_endpoint, client_secret = None, scopes = None,
-                 client_id = None, authorization_endpoint = None,
-                 token_filename = None):
+    def __init__(
+        self, client_name: str, redirect_uri: str, username: str,
+        password: str, domain: str, login_endpoint: str,
+        client_secret: str = None, scopes: str = None, client_id: str = None,
+        authorization_endpoint: str = None, token_filename: str = None
+    ):
+        """
+        Client initialization.
 
+        If the login_endpoint contain the path 'oauth' then the OAuth2
+        Authorization Code flow will be used instead of the plain HTTP login.
+
+        Parameters
+        ----------
+        client_name: str
+            The name of the client using the API
+        redirect_uri: str
+            The redirect URI to use on the API
+        username: str
+            The username to use for login
+        password: str
+            The password to use for login
+        login_endpoint: str
+            The API login endpoint to use
+        client_secret: str
+            OAuth2 only. The client secret
+        scopes: str
+            OAuth2 only. The scopes of the client
+        client_id: str
+            OAuth2 only. The client id to use (A one registred on the API)
+        authorization_endpoint: str
+            OAuth2 only. The authorization endpoint to use on the API
+        token_filename: str
+            OAuth2 only. The token filename where to save the token
+        """
         self.client_name = client_name
         self.redirect_uri = redirect_uri
         self.token = None
