@@ -3,7 +3,7 @@
 A simple funkwhale API client library
 
 Since API is not frozen, this client library is written for the version
-`0.20.1`.
+`1.0.1`.
 
 # Install
 
