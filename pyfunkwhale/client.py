@@ -85,6 +85,7 @@ class Client(object):
             self.authorization_url, self.state = self.oauth_client. \
                 authorization_url(
                                 self.authorization_endpoint)
+            self._connect()
 
     def _connect(self):
         """
