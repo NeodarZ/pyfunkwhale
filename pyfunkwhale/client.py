@@ -113,6 +113,8 @@ class Client(object):
         Check if the token is expired in 60 seconds and if True will ask a new
         token from the instance.
         """
+        if self.token is None:
+            raise InvalidTokenError(self)
         if time() - 60 > self.token["expires_at"]:
             try:
                 self.token = self.oauth_client.refresh_token(
